@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/headerAdmin :: common-header-adm"/>
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<head th:replace="common/headerAdmin :: navbar-adm"/>
+
+
+<div class="table-responsive">
+    <table id="usersTable" class="table table-bordered table-hover table-striped">
+
+        <thead>
+        <tr>
+            <th>User Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Primary Account Balance</th>
+            <th>Savings Account Balance</th>
+            <th>Enabled</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="user : ${users}">
+            <td data-th-text="${user.username}">...</td>
+            <td data-th-text="${user.firstName}">...</td>
+            <td data-th-text="${user.lastName}">...</td>
+            <td data-th-text="${user.email}">...</td>
+            <td data-th-text="${user.phone}">...</td>
+            <td><a data-th-text="${user.primaryAccount.accountBalance}" th:href = "@{/admin/primaryTransactionsAdmin?username=}+${user.username}">...</a></td>
+            <td><a data-th-text="${user.savingsAccount.accountBalance}" th:href = "@{/admin/savingsTransactionsAdmin?username=}+${user.username}">...</a></td>
+            <td data-th-text="${user.enabled}">...</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="common/headerAdmin :: body-bottom-scripts-adm"/>
+<script>
+    $(document).ready(function() {
+        $('#usersTable').DataTable();
+    } );
+</script>
+</body>
+</html>
